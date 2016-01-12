@@ -47,3 +47,6 @@ group :development do
 end
 
 gem 'devise'
+
+gem 'httparty'
+gem 'nokogiri'
