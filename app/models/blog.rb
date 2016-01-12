@@ -1,4 +1,6 @@
 class Blog < ActiveRecord::Base
+  has_many :user_blogs
+
   before_validation :format_link
 
   validates :link, presence: true, uniqueness: true, format: { with: URI.regexp(%w(http https)) }
