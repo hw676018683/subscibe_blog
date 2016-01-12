@@ -53,6 +53,7 @@ GEM
     coffee-script-source (1.10.0)
     columnize (0.9.0)
     concurrent-ruby (1.0.0)
+    database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     devise (3.5.3)
       bcrypt (~> 3.0)
@@ -228,6 +229,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.1.0)
+  database_cleaner
   devise
   fabrication
   ffaker
