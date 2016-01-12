@@ -50,3 +50,5 @@ gem 'devise'
 
 gem 'httparty'
 gem 'nokogiri'
+
+gem 'whenever', :require => false
