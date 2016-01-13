@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :user_blogs, dependent: :destroy
-  has_many :subscibe_blogs, through: :user_blogs, source: :blog
+  has_many :subscriptions, dependent: :destroy
+  has_many :subscibe_blogs, through: :subscriptions, source: :blog
 end

@@ -1,0 +1,2 @@
+Fabricator(:subscription) do
+end

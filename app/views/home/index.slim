@@ -1,9 +1,9 @@
 - if current_user
   .list-group
-    - @user_blogs.each do |user_blog|
+    - @subscriptions.each do |subscription|
       = link_to '#', class: 'list-group-item' do
-        = user_blog.blog.link
-        - if user_blog.unread_count > 0
-          span.badge = user_blog.unread_count
+        = subscription.blog.link
+        - if subscription.unread_count > 0
+          span.badge = subscription.unread_count
 - else
   | 请登录

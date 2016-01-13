@@ -1,5 +1,5 @@
 class Blog < ActiveRecord::Base
-  has_many :user_blogs
+  has_many :subscriptions
 
   before_validation :format_link
 

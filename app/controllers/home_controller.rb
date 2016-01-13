@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   def index
     if current_user
-      @user_blogs = current_user.user_blogs.includes(:blog)
+      @subscriptions = current_user.subscriptions.includes(:blog)
     end
   end
 end
