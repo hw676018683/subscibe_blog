@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :user_blogs, dependent: :destroy
+  has_many :subscibe_blogs, through: :user_blogs, source: :blog
 end
