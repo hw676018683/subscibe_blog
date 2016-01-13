@@ -7,6 +7,10 @@ class SubscriptionsController < ApplicationController
     @subscription.read_blog!
   end
 
+  def new
+    @subscription = current_user.subscriptions.new
+  end
+
   private
 
   def find_subscription
