@@ -1,0 +1,6 @@
+.page-header
+  h3 = @subscibed_blog.blog.link
+
+.list-group
+  - @unread_articles.each do |article|
+    = link_to article['title'], article['link'], class: 'list-group-item'
