@@ -6,4 +6,12 @@ class User < ActiveRecord::Base
 
   has_many :subscriptions, dependent: :destroy
   has_many :subscibe_blogs, through: :subscriptions, source: :blog
+
+  def subscibe blog
+    subscriptions.create blog: blog, read_articles: blog.articles
+  end
+
+  def subscibe? blog
+    subscriptions.exists?(blog: blog)
+  end
 end

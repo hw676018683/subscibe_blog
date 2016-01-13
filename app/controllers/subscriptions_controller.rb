@@ -11,6 +11,18 @@ class SubscriptionsController < ApplicationController
     @subscription = current_user.subscriptions.new
   end
 
+  def create
+    blog = Blog.where(link: Blog.format_link(params[:link])).first_or_create
+
+    if current_user.subscibe? blog
+      flash[:danger] = "你已经订阅了 #{params[:link]}"
+      redirect_to root_path
+    else
+      subscription = current_user.subscibe blog
+      redirect_to subscription, flash: { success: '订阅成功' }
+    end
+  end
+
   private
 
   def find_subscription
