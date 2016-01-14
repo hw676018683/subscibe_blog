@@ -30,7 +30,7 @@ namespace :blog do
       end
 
       articles.compact!
-      blog.update articles: articles
+      blog.update articles: articles if blog.articles != articles
     end
 
     puts 'Finish checking!'

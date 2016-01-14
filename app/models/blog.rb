@@ -5,6 +5,8 @@ class Blog < ActiveRecord::Base
 
   validates :link, presence: true, uniqueness: true, format: { with: URI.regexp(%w(http https)) }
 
+  after_update :notify_subscribers, if: :articles_changed?
+
   def self.format_link link
     unless link.start_with?('http') || link.start_with?('https')
       link = "http://#{link}"
@@ -22,5 +24,11 @@ class Blog < ActiveRecord::Base
     return if link.blank?
 
     self.link = self.class.format_link(link)
+  end
+
+  def notify_subscribers
+    subscriptions.each do |subscription|
+      NotificationMailer.notice_update(subscription).deliver_now if subscription.user.email_notify
+    end
   end
 end
