@@ -54,3 +54,5 @@ gem 'httparty'
 gem 'nokogiri'
 
 gem 'whenever', :require => false
+
+gem 'settingslogic'
