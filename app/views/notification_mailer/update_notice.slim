@@ -9,4 +9,4 @@ html
      |  有新的更新啦
     - @subscription.unread_articles.each do |article|
       li
-        = link_to article['title'], Blog.format_article_link(article['link'])
+        = link_to article['title'], article['link']

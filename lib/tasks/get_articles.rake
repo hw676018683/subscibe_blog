@@ -16,7 +16,11 @@ namespace :blog do
           link = a_node.attributes['href'].to_s
           next if link.blank?
 
-          if link.start_with?('/') || link.start_with(blog.link)
+          if link.start_with?('/')
+            article[:link] = URI.join(blog.link, link).to_s
+            article[:title] = a_node.children.first.to_s
+            break
+          elsif link.start_with?(blog.link)
             article[:link] = link
             article[:title] = a_node.children.first.to_s
             break
