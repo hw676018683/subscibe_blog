@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_subscription, only: [:show, :destroy, :edit]
+  before_action :find_subscription, only: [:show, :destroy, :edit, :update]
 
   def show
     @unread_articles = @subscription.unread_articles
@@ -24,6 +24,14 @@ class SubscriptionsController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+    blog = Blog.where(link: Blog.format_link(params[:link])).first_or_create
+
+    @subscription.update blog: blog
+    flash[:success] = '更新成功'
+    redirect_to @subscription
   end
 
   def destroy

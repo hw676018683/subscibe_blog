@@ -66,4 +66,26 @@ RSpec.describe SubscriptionsController, type: :controller do
     end
   end
 
+  describe 'PATCH #update' do
+    let!(:blog) { Fabricate :blog, link: 'www.testxx1.com' }
+
+    it 'creates a blog if blog not exists' do
+      expect {
+        patch :update, id: subscription.id, link: 'www.new.com'
+      }.to change { Blog.count }.by 1
+    end
+
+    it 'doesnt create a blog if blog exists' do
+      expect {
+        patch :update, id: subscription.id, link: 'www.testxx1.com'
+      }.not_to change { Blog.count }
+    end
+
+    it 'updates the blog of subscription' do
+      patch :update, id: subscription.id, link: 'www.testxx1.com'
+      expect(subscription.reload.blog.link).to eq 'http://www.testxx1.com/'
+    end
+
+  end
+
 end
