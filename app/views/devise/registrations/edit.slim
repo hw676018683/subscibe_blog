@@ -1,0 +1,42 @@
+.row
+  .col-md-9
+    .panel.panel-default
+      .panel-heading 编辑
+      .panel-body
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal' }) do |f|
+          = render "shared/error_messages", target: resource if params[:by].blank?
+          .form-group
+            = f.label :email, '邮箱', class: 'control-label col-sm-2'
+            .col-sm-10
+              = f.text_field :email, class: 'form-control'
+          .form-group
+            .col-sm-10.col-sm-offset-2
+              .checkbox
+                label.checkbox for="user_email_notify"
+                  = f.check_box :email_notify
+                  | 是否发送更新到邮箱
+          .form-group
+            .col-sm-10.col-sm-offset-2
+              = f.submit '更新', class: "btn btn-primary", 'data-disable-with' => '更新中'
+
+    .panel.panel-default
+      .panel-heading 修改密码
+      .panel-body
+        = form_for(resource, as: resource_name, url: registration_path(resource_name, by: :pwd), html: { method: :put, class: 'form-horizontal' }) do |f|
+          = render "shared/error_messages", target: resource if params[:by] == "pwd"
+          input name="by" type="hidden" value="pwd"
+          .form-group
+            = f.label :current_password, '旧密码', class: 'control-label col-sm-2'
+            .col-sm-10
+              = f.password_field :current_password, class: 'form-control'
+          .form-group
+            = f.label :password, '密码', class: 'control-label col-sm-2'
+            .col-sm-10
+              = f.password_field :password, class: 'form-control'
+          .form-group
+            = f.label :password_confirmation, '确认密码', class: 'control-label col-sm-2'
+            .col-sm-10
+              = f.password_field :password_confirmation, class: 'form-control'
+          .form-group
+            .col-sm-10.col-sm-offset-2
+              = f.submit '提交', class: "btn btn-success", 'data-disable-with' => '修改中'
