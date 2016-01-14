@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type"
+  body
+    p
+     | 你订阅的博客
+     = @subscription.blog.link
+     |  有新的更新啦
+    - @subscription.unread_articles.each do |article|
+      li
+        = link_to article['title'], Blog.format_article_link(article['link'])
