@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_subscription, only: [:show, :destroy]
+  before_action :find_subscription, only: [:show, :destroy, :edit]
 
   def show
     @unread_articles = @subscription.unread_articles
@@ -21,6 +21,9 @@ class SubscriptionsController < ApplicationController
       subscription = current_user.subscibe blog
       redirect_to subscription, flash: { success: '订阅成功' }
     end
+  end
+
+  def edit
   end
 
   def destroy

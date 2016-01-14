@@ -2,6 +2,7 @@
   h3 = @subscription.blog.link
 
 = link_to '取消订阅', @subscription, method: :delete, class: 'btn btn-primary'
+= link_to '编辑', [:edit, @subscription], class: 'btn btn-primary'
 
 .list-group
   - @unread_articles.each do |article|

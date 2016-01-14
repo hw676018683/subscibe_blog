@@ -59,4 +59,11 @@ RSpec.describe SubscriptionsController, type: :controller do
     end
   end
 
+  describe 'GET #edit' do
+    it "assigns the subscription" do
+      get :edit, { id: subscription.id }
+      expect(assigns(:subscription)).to eq subscription
+    end
+  end
+
 end
