@@ -1,10 +1,18 @@
 - if current_user
-  = link_to '增加订阅', new_subscription_path, class: 'btn btn-primary'
-  .list-group
-    - @subscriptions.each do |subscription|
-      = link_to '#', class: 'list-group-item' do
-        = subscription.blog.link
-        - if subscription.unread_count > 0
-          span.badge = subscription.unread_count
+  .row
+    .col-md-9
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title 订阅博客
+        .panel-body
+          .list-group
+            - @subscriptions.each do |subscription|
+              = link_to subscription, class: 'list-group-item' do
+                = subscription.blog.link
+                - if subscription.unread_count > 0
+                  span.badge.progress-bar-info = subscription.unread_count
+    .col-md-3
+      = link_to '增加订阅', new_subscription_path, class: 'btn btn-primary'
+
 - else
   | 请登录

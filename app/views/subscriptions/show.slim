@@ -1,9 +1,13 @@
 .page-header
-  h3 = @subscription.blog.link
-
-= link_to '取消订阅', @subscription, method: :delete, class: 'btn btn-primary'
-= link_to '编辑', [:edit, @subscription], class: 'btn btn-primary'
+  h3
+    = @subscription.blog.link
+    .pull-right
+      = link_to '取消订阅', @subscription, method: :delete, class: 'btn btn-primary'
+      = link_to '编辑', [:edit, @subscription], class: 'btn btn-info'
 
 .list-group
-  - @unread_articles.each do |article|
-    = link_to article['title'], article['link'], class: 'list-group-item'
+  - @subscription.blog.articles.each do |article|
+    - if article.in? @unread_articles
+      = link_to article['title'], article['link'], class: 'list-group-item list-group-item-info'
+    - else
+      = link_to article['title'], article['link'], class: 'list-group-item'
