@@ -1,4 +1,6 @@
 - flash.each do |name, msg|
+  - if name == 'notice'
+    - name = 'info'
   .alert.alert-dismissible.fade.in *{class: "alert-#{name}"} role='alert'
     button type='button' class='close' data-dismiss='alert'
       span aria-hidden='true' &times;
