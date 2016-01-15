@@ -1,0 +1,7 @@
+---
+zh-CN:
+  activerecord:
+    attributes:
+      subscription:
+        blog_name: 博客名称
+        blog_link: 博客地址
