@@ -8,6 +8,7 @@ class Blog < ActiveRecord::Base
   after_update :notify_subscribers, if: :articles_changed?
 
   def self.format_link link
+    link = link.to_s
     unless link.start_with?('http') || link.start_with?('https')
       link = "http://#{link}"
     end
