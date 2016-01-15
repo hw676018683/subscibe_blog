@@ -4,15 +4,14 @@
       .panel.panel-default
         .panel-heading
           h3.panel-title 订阅博客
-        .panel-body
-          .list-group
-            - @subscriptions.each do |subscription|
-              = link_to subscription, class: 'list-group-item' do
-                = subscription.blog_name
-                span.label.label-info.link-item
-                  = subscription.blog_link
-                - if subscription.unread_count > 0
-                  span.badge.progress-bar-info = subscription.unread_count
+        ul.list-group
+          - @subscriptions.each do |subscription|
+            = link_to subscription, class: 'list-group-item' do
+              = subscription.blog_name
+              span.label.label-info.link-item
+                = subscription.blog_link
+              - if subscription.unread_count > 0
+                span.badge.progress-bar-info = subscription.unread_count
     .col-md-3
       .panel.panel-default
         .panel-body
@@ -21,10 +20,9 @@
       .panel.panel-info
         .panel-heading
           h3.panel-title 热度榜
-        .panel-body
-          .list-group
-            - @top_10_blogs.each do |blog|
-              = link_to blog.link, blog.link, class: 'list-group-item'
+        ul.list-group
+          - @top_10_blogs.each do |blog|
+            = link_to blog.link, blog.link, class: 'list-group-item'
 
 - else
   | 请登录
