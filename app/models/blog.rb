@@ -29,7 +29,11 @@ class Blog < ActiveRecord::Base
 
   def notify_subscribers
     subscriptions.each do |subscription|
-      NotificationMailer.notice_update(subscription).deliver_now if subscription.user.email_notify
+      if subscription.read_articles.empty?
+        subscription.read_blog!
+      else
+        NotificationMailer.notice_update(subscription).deliver_now if subscription.user.email_notify
+      end
     end
   end
 end
