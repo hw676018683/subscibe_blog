@@ -56,3 +56,6 @@ gem 'nokogiri'
 gem 'whenever', :require => false
 
 gem 'settingslogic'
+
+gem 'omniauth'
+gem 'omniauth-github'
