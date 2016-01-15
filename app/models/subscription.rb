@@ -1,6 +1,6 @@
 class Subscription < ActiveRecord::Base
   belongs_to :user
-  belongs_to :blog
+  belongs_to :blog, counter_cache: true
 
   before_validation :format_blog_link
 
@@ -25,6 +25,7 @@ class Subscription < ActiveRecord::Base
 
   def set_blog
     blog = Blog.where(link: blog_link).first_or_create
+    Blog.increment_counter :subscriptions_count, blog.id
     update_columns blog_id: blog.id, read_articles: blog.articles
   end
 

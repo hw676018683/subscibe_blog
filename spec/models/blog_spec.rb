@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Blog, type: :model do
-  let(:blog) { Fabricate :blog }
+  let(:blog) { Fabricate :blog, articles: [{ link: 'http://test.com/xxx', title: 'xxx' }] }
 
   describe 'Validation' do
     it 'is valid' do
@@ -23,7 +23,7 @@ RSpec.describe Blog, type: :model do
   describe 'update' do
     let(:user) { Fabricate :user }
     before do
-      Fabricate :subscription, user: user, blog_link: blog.link
+      Fabricate :subscription, user: user, blog_link: blog.link, read_articles: [{ link: 'test.com', title: 'xx' }]
     end
 
     it 'sends a email for subscriber if email_notify is true' do
