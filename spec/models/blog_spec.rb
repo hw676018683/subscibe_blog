@@ -23,7 +23,7 @@ RSpec.describe Blog, type: :model do
   describe 'update' do
     let(:user) { Fabricate :user }
     before do
-      user.subscibe blog
+      Fabricate :subscription, user: user, blog_link: blog.link
     end
 
     it 'sends a email for subscriber if email_notify is true' do

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SubscriptionsController, type: :controller do
   let(:user) { Fabricate :user }
   let!(:blog) { Fabricate :blog, link: 'www.testxx.com' }
-  let(:subscription) { Fabricate :subscription, user: user, blog: blog }
+  let!(:subscription) { Fabricate :subscription, user: user, blog: blog }
 
   before do
     sign_in user
@@ -24,35 +24,25 @@ RSpec.describe SubscriptionsController, type: :controller do
   end
 
   describe 'POST #create' do
+    let(:valid_params) { { blog_link: 'www.testxx.com', blog_name: 'testxx' } }
+
     it 'creates a new subscription if not subscibing' do
       expect {
-        post :create, link: blog.link
+        post :create, subscription: valid_params
       }.to change { Subscription.count }.by 1
     end
 
     it 'doesnt create a new subscription if subscibing' do
-      user.subscibe blog
+      Fabricate :subscription, user: user, blog_name: 'testxx', blog_link: 'www.testxx.com'
       expect {
-        post :create, link: blog.link
+        post :create, subscription: valid_params
       }.not_to change { Subscription.count }
-    end
-
-    it 'creates a new blog if blog not existing' do
-      expect {
-        post :create, link: 'www.new.com'
-      }.to change { Blog.count }.by 1
-    end
-
-    it 'doesnt create a new blog if blog exists' do
-      expect {
-        post :create, link: blog.link
-      }.not_to change { Blog.count }
     end
   end
 
   describe 'DELETE #destroy' do
     it 'deletes the subscription' do
-      subscription = user.subscibe blog
+      subscription = Fabricate :subscription, user: user, blog_name: 'testxx', blog_link: 'www.testxx.com'
       expect {
         delete :destroy, id: subscription.id
       }.to change { Subscription.count }.by -1
@@ -68,24 +58,23 @@ RSpec.describe SubscriptionsController, type: :controller do
 
   describe 'PATCH #update' do
     let!(:blog) { Fabricate :blog, link: 'www.testxx1.com' }
+    let(:valid_params) { Fabricate.attributes_for :subscription, blog_name: 'new' }
+    let(:invalid_params) { Fabricate.attributes_for :subscription, blog_name: nil }
 
-    it 'creates a blog if blog not exists' do
-      expect {
-        patch :update, id: subscription.id, link: 'www.new.com'
-      }.to change { Blog.count }.by 1
+    context 'with valid params' do
+      it 'updates the blog_name of subscription' do
+        patch :update, id: subscription.id, subscription: valid_params
+        expect(subscription.reload.blog_name).to eq 'new'
+      end
     end
 
-    it 'doesnt create a blog if blog exists' do
-      expect {
-        patch :update, id: subscription.id, link: 'www.testxx1.com'
-      }.not_to change { Blog.count }
+    context 'with invalid params' do
+      it 'updates the blog_name of subscription' do
+        expect {
+          patch :update, id: subscription.id, subscription: invalid_params
+        }.not_to change { subscription.reload.blog_name }
+      end
     end
-
-    it 'updates the blog of subscription' do
-      patch :update, id: subscription.id, link: 'www.testxx1.com'
-      expect(subscription.reload.blog.link).to eq 'http://www.testxx1.com/'
-    end
-
   end
 
 end

@@ -1,5 +1,1 @@
-= form_tag subscriptions_path do
-  .form-group
-    = label_tag :link, '博客地址'
-    = text_field_tag :link, '', class: 'form-control'
-  = submit_tag '创建', class: 'btn btn-primary'
+= render 'form'

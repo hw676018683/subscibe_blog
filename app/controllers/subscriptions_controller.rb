@@ -9,29 +9,30 @@ class SubscriptionsController < ApplicationController
 
   def new
     @subscription = current_user.subscriptions.new
+    @button_text = '创建'
   end
 
   def create
-    blog = Blog.where(link: Blog.format_link(params[:link])).first_or_create
+    @subscription = current_user.subscriptions.build subscription_params
 
-    if current_user.subscibe? blog
-      flash[:danger] = "你已经订阅了 #{params[:link]}"
-      redirect_to root_path
+    if @subscription.save
+      redirect_to @subscription, flash: { success: '订阅成功' }
     else
-      subscription = current_user.subscibe blog
-      redirect_to subscription, flash: { success: '订阅成功' }
+      render :new
     end
   end
 
   def edit
+    @button_text = '保存'
   end
 
   def update
-    blog = Blog.where(link: Blog.format_link(params[:link])).first_or_create
-
-    @subscription.update blog: blog
-    flash[:success] = '更新成功'
-    redirect_to @subscription
+    if @subscription.update subscription_params
+      flash[:success] = '更新成功'
+      redirect_to @subscription
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -43,5 +44,9 @@ class SubscriptionsController < ApplicationController
 
   def find_subscription
     @subscription = current_user.subscriptions.find params[:id]
+  end
+
+  def subscription_params
+    params.require(:subscription).permit(:blog_name, :blog_link)
   end
 end

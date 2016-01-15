@@ -1,5 +1,1 @@
-= form_tag @subscription, method: :patch do
-  .form-group
-    = label_tag :link, '博客地址'
-    = text_field_tag :link, @subscription.blog.link, class: 'form-control'
-  = submit_tag '更新', class: 'btn btn-primary'
+= render 'form'
