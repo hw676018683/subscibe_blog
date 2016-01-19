@@ -59,3 +59,6 @@ gem 'settingslogic'
 
 gem 'omniauth'
 gem 'omniauth-github'
+
+gem 'capybara'
+gem 'poltergeist'

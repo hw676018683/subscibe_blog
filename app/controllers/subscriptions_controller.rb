@@ -4,6 +4,7 @@ class SubscriptionsController < ApplicationController
 
   def show
     @unread_articles = @subscription.unread_articles
+    @blog = @subscription.blog
     @subscription.read_blog!
   end
 
