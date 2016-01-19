@@ -7,8 +7,9 @@
         ul.list-group
           - @subscriptions.each do |subscription|
             = link_to subscription, class: 'list-group-item' do
-              = subscription.blog_name
-              span.label.label-info.link-item
+              .col-md-3
+                = truncate(subscription.blog_name, length: 10)
+              span.label.label-default.link-item
                 = subscription.blog_link
               - if subscription.unread_count > 0
                 span.badge.progress-bar-info = subscription.unread_count
