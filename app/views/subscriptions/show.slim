@@ -4,7 +4,8 @@
     span.label.label-info.link-item
       = @subscription.blog_link
     .pull-right
-      = link_to '取消订阅', @subscription, method: :delete, class: 'btn btn-primary'
+      = link_to '反馈', new_feedback_path(blog_id: @subscription.blog_id), class: 'btn btn-primary'
+      = link_to '取消订阅', @subscription, method: :delete, class: 'btn btn-primary link-item'
       = link_to '编辑', [:edit, @subscription], class: 'btn btn-info link-item'
 
 - if @blog.articles.empty? && @blog.last_crawl_at && @blog.last_crawl_at > @blog.updated_at

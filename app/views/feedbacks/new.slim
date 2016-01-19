@@ -1,0 +1,7 @@
+= form_for @feedback do |f|
+  = render "/shared/error_messages", target: @feedback
+  = hidden_field_tag :blog_id, @blog.id
+  .form-group
+    = f.label :content, '反馈内容'
+    = f.text_area :content, class: 'form-control'
+  = submit_tag @button_text, class: 'btn btn-primary'

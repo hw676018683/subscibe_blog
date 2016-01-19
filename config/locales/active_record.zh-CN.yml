@@ -5,3 +5,5 @@ zh-CN:
       subscription:
         blog_name: 博客名称
         blog_link: 博客地址
+      feedback:
+        content: 反馈内容
