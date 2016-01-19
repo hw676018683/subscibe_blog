@@ -32,4 +32,8 @@
             = link_to blog.link, blog.link, class: 'list-group-item'
 
 - else
-  | 请登录
+  .jumbotron.text-center
+    h4 一个帮助你关注博客动态的工具
+    p
+      = link_to '注册', new_user_registration_path, class: 'btn btn-primary btn-lg', role: 'button'
+
