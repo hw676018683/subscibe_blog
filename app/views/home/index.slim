@@ -9,7 +9,7 @@
             = link_to subscription, class: 'list-group-item' do
               .col-md-3
                 = truncate(subscription.blog_name, length: 10)
-              span.label.label-default.link-item
+              span.label.label-info.link-item
                 = subscription.blog_link
               - if subscription.unread_count > 0
                 span.badge.progress-bar-info = subscription.unread_count
@@ -20,13 +20,6 @@
 
       .panel.panel-info
         .panel-heading
-          h3.panel-title 小提示
-        .panel-body
-          p 博客订阅助手每天去检查，如果有更新会邮件提醒你。
-          p 程序员能力有限，也许无法正确的解析博客网站。
-
-      .panel.panel-info
-        .panel-heading
           h3.panel-title 热度榜
         ul.list-group
           - @top_10_blogs.each do |blog|
@@ -34,7 +27,14 @@
 
 - else
   .jumbotron.text-center
-    h4 一个帮助你关注博客动态的工具
+    .page-header
+      h2
+        | 博客订阅助手
+      h3
+        small 一个帮助你关注大神博客的工具
     p
       = link_to '注册', new_user_registration_path, class: 'btn btn-primary btn-lg', role: 'button'
+    h4
+      small 博客订阅助手每天去检查，如果有更新会邮件提醒你。
+
 
