@@ -168,6 +168,7 @@ GEM
     pry-byebug (3.2.0)
       byebug (~> 5.0)
       pry (~> 0.10)
+    puma (2.14.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -312,6 +313,7 @@ DEPENDENCIES
   poltergeist
   pry
   pry-byebug
+  puma
   quiet_assets
   rails (= 4.2.5)
   rspec-collection_matchers
