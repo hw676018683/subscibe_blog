@@ -6,6 +6,14 @@ development:
     user: email_address
     password: email_password
 
+  github:
+    app_id:
+    app_secret:
+
+  admin_emails:
+    - xx@qq.com
+
+
 test:
   <<: *defaults
 

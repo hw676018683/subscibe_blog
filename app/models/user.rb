@@ -29,4 +29,8 @@ class User < ActiveRecord::Base
     end
     user
   end
+
+  def admin?
+    email.in? Settings.admin_emails
+  end
 end
