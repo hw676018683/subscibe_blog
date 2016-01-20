@@ -62,3 +62,8 @@ gem 'omniauth-github'
 
 gem 'capybara'
 gem 'poltergeist'
+
+# Slack api 封装
+gem 'slack-notifier'
+# 异常监控
+gem 'exception_notification'
