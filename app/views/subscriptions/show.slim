@@ -10,7 +10,10 @@
 
 - if @blog.articles.empty? && @blog.last_crawl_at && @blog.last_crawl_at > @blog.updated_at
   .alert.alert-danger role="alert"
-    | 订阅助手没有获取到文章，请确保链接是否可以访问
+    p 订阅助手没有获取到文章，可能有以下原因：
+    ul
+      li 链接不可访问，或者没有文章列表
+      li 解析网站失败，程序员能力不够（请反馈）
 
 .list-group
   - @subscription.blog.articles.each do |article|
