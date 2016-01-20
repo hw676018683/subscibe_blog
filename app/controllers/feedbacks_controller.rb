@@ -1,5 +1,7 @@
 class FeedbacksController < ApplicationController
-  before_action :find_blog
+  before_action :authenticate_user!
+  before_action :find_blog, only: [:new, :create]
+  before_action :ensure_admin, only: [:index, :destroy]
 
   def new
     @feedback = @blog.feedbacks.new
@@ -15,6 +17,17 @@ class FeedbacksController < ApplicationController
     end
   end
 
+  def index
+    @feedbacks = Feedback.all
+  end
+
+  def destroy
+    @feedback = Feedback.find params[:id]
+    @feedback.destroy
+    flash[:success] = '删除成功'
+    redirect_to feedbacks_path
+  end
+
   private
 
   def find_blog
@@ -23,5 +36,11 @@ class FeedbacksController < ApplicationController
 
   def feedback_params
     params.require(:feedback).permit(:content)
+  end
+
+  def ensure_admin
+    unless current_user.admin?
+      redirect_to root_path
+    end
   end
 end

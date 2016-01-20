@@ -1,0 +1,13 @@
+.row
+  .col-md-9
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title 反馈
+      ul.list-group
+        - @feedbacks.each do |feedback|
+          .list-group-item
+            = link_to feedback.blog.link, feedback.blog.link
+            | ：
+            = feedback.content
+            .pull-right
+              = link_to '删除', feedback, method: :delete
