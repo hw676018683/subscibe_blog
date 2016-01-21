@@ -20,6 +20,10 @@ class Blog < ActiveRecord::Base
     link
   end
 
+  def error?
+    articles.empty? && last_crawl_at && last_crawl_at > updated_at
+  end
+
   private
 
   def format_link

@@ -9,7 +9,7 @@
             = link_to subscription, class: 'list-group-item' do
               .col-md-3
                 = truncate(subscription.blog_name, length: 10)
-              span.label.label-info.link-item
+              span.label.link-item class=(subscription.blog.error? ? 'label-default' : 'label-info')
                 = subscription.blog_link
               - if subscription.unread_count > 0
                 span.badge.progress-bar-info = subscription.unread_count

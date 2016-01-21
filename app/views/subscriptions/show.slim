@@ -8,7 +8,7 @@
       = link_to '取消订阅', @subscription, method: :delete, class: 'btn btn-primary link-item'
       = link_to '编辑', [:edit, @subscription], class: 'btn btn-info link-item'
 
-- if @blog.articles.empty? && @blog.last_crawl_at && @blog.last_crawl_at > @blog.updated_at
+- if @blog.error?
   .alert.alert-danger role="alert"
     p 订阅助手没有获取到文章，可能有以下原因：
     ul
