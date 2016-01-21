@@ -11,7 +11,7 @@ namespace :blog do
       begin
         blog.update_columns last_crawl_at: Time.now
         articles = ArticlesCrawler.new(blog.link, crawler).run
-      rescue Capybara::Poltergeist::StatusFailError
+      rescue Exception => e
         next
       end
       blog.update articles: articles if blog.articles != articles
