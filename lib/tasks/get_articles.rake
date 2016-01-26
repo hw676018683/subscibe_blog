@@ -148,7 +148,7 @@ class PoltergeistCrawler
         phantomjs_logger: open('/dev/null') # if you don't care about JS errors/console.logs
       })
     end
-    Capybara.default_max_wait_time = 3
+    Capybara.default_max_wait_time = 10
     Capybara.run_server = false
     Capybara.default_driver = :poltergeist_crawler
     page.driver.headers = {
