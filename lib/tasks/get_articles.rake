@@ -148,12 +148,12 @@ class PoltergeistCrawler
     Capybara.register_driver :poltergeist_crawler do |app|
       Capybara::Poltergeist::Driver.new(app, {
         :js_errors => false,
-        :timeout   => 100
+        :timeout   => 100,
         :inspector => false,
         phantomjs_logger: open('/dev/null') # if you don't care about JS errors/console.logs
       })
     end
-    Capybara.default_max_wait_time = 10
+    Capybara.default_max_wait_time = 100
     Capybara.run_server = false
     Capybara.default_driver = :poltergeist_crawler
     page.driver.headers = {
