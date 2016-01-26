@@ -12,7 +12,10 @@ namespace :blog do
         blog.update_columns last_crawl_at: Time.now
         articles = ArticlesCrawler.new(blog.link, crawler).run
       rescue Exception => e
-        Rails.logger.info e.inspect
+        File.open(ENV['WHENEVER_ERROR_LOG'], 'a+') do |f|
+          f.puts blog.link
+          f.puts e.inspect
+        end
         next
       end
       blog.update articles: articles if blog.articles != articles
