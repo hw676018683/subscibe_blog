@@ -148,6 +148,7 @@ class PoltergeistCrawler
     Capybara.register_driver :poltergeist_crawler do |app|
       Capybara::Poltergeist::Driver.new(app, {
         :js_errors => false,
+        :timeout   => 100
         :inspector => false,
         phantomjs_logger: open('/dev/null') # if you don't care about JS errors/console.logs
       })
